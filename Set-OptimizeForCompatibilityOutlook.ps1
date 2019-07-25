@@ -1,0 +1,2 @@
+﻿#need "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE"
+Set-ItemProperty HKCU:\Software\Microsoft\Office\16.0\Outlook\Options -Name RenderForMonitorDpi -Value 0 -Type DWord -ErrorAction SilentlyContinue

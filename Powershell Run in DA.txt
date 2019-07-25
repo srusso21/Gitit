@@ -1,0 +1,1 @@
+﻿powershell.exe -NoProfile -ExecutionPolicy Bypass -File "\\wma-arch.com\r\Resour\ITSupport\Scripts\PowerShell\ps1\Uninstall Sophos.ps1" -WindowsStyle Minimized

@@ -1,0 +1,1 @@
+﻿Get-ADComputer -Filter * -Properties * | where {$_.description -match 'ilyes'}

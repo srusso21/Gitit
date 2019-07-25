@@ -1,0 +1,1 @@
+﻿Get-ADUser -Filter * -Properties SamAccountName, emailaddress | select  SamAccountName, emailaddress | Export-CSV "C:\Temp\SamAccountName, email.csv"

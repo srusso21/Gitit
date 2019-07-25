@@ -1,0 +1,1 @@
+﻿$BBComputers = Get-ADComputer -Filter {name -like 'cws*'} -Properties Name,lastlogondate | where {$_.lastlogondate -lt "1/1/2018 5:42:00 AM"} | select name 

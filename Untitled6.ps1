@@ -1,0 +1,1 @@
+﻿Enable-BitLocker C: -AdAccountOrGroupProtector -AdAccountOrGroup "wma-arch.com\"

@@ -1,0 +1,1 @@
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "&'\\wma-arch.com\r\Resour\ITSupport\Scripts\PowerShell\Apps_Script.ps1'"

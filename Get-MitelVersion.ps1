@@ -1,0 +1,1 @@
+﻿(Get-ItemProperty "HKLM:\software\WOW6432Node\ShoreTel\ShoreTel Manhattan\").productversion
