@@ -1,2 +1,6 @@
-﻿param ($computername = (Read-Host -Prompt "Enter Computername"))
-(Get-ADComputer -Identity $computername -Properties ms-mcs-admPwd | select ms-mcs-admPwd).'ms-mcs-admPwd'
+﻿function Get-LocalAdminPassword {
+    param (
+        $user = (Read-Host  -Prompt "Enter Computername")
+    )
+    Get-ADComputer -Identity $user -Properties ms-mcs-admPwd | select -ExpandProperty ms-mcs-admPwd
+}

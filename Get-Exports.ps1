@@ -4,6 +4,6 @@ Get-ADComputer -Filter 'name -like "ws-*"' -Properties description,managedby,whe
 
 Get-ADComputer -Filter "name -like 'ws-*'" -Properties managedby | Select-Object managedby,name | Export-Csv -NoTypeInformation "\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\ADComputerManaged.csv"
 
-Get-ADUser -Filter * -Properties Managedby, | Export-Csv '\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\User.csv' -NoTypeInformation
+Get-ADUser -Filter * -Properties Managedby | Export-Csv '\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\User.csv' -NoTypeInformation
 
 Get-ADComputer -Filter 'name -like "ws-*"' -Properties * | Export-Csv '\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Computer.csv' -NoTypeInformation

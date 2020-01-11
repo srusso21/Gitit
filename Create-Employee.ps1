@@ -1,9 +1,10 @@
-﻿#add Functions
+﻿Function Create-Employee {
+#add Functions
 function Connect-ExchangeOnPrem {
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://irvmail01.wma-arch.com/PowerShell/ -Authentication Kerberos
 Import-PSSession $Session -DisableNameChecking
 }
-function Sync-Azure{ 
+function Sync-Azure{
 Invoke-Command IRVAZADCon01 -ScriptBlock {Import-Module ADSync; Start-ADSyncSyncCycle -PolicyType Delta}
 }
 function Connect-Office365{
@@ -434,6 +435,7 @@ Default { }
 }
 }
 }
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 & "\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Get-Exports.ps1"
 #define Variables
     $e3                = "waremalcomb:POWER_BI_STANDARD","waremalcomb:ENTERPRISEPACK","waremalcomb:DYN365_TEAM_MEMBERS","waremalcomb:FLOW_FREE"
@@ -443,7 +445,7 @@ Default { }
     #$adComputers       = Import-Csv '\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Computer.csv'
 
 #changes password
-    $Passcode = ConvertTo-SecureString -AsPlainText "Waremalcomb1" -Force
+    $Passcode = ConvertTo-SecureString -AsPlainText "W@reM@lcomb1!" -Force
 #Set First Name
     $Given             = Read-Host -Prompt "Enter First Name"
 #Set Last Name
@@ -457,7 +459,7 @@ Default { }
 #Enter Manager
     $managerName       = Read-Host -Prompt "Enter Manager's Name"
 
- 
+
 #General
     $IUPN              = "@wma-arch.com"
     $FUPN              = "@waremalcomb.com"
@@ -500,16 +502,16 @@ Default { }
 
 #provide alternative
         Write-Host "$InitialUpn"'already exists, Do you want to try to create'"$AltInitialUpn"'? (y/n)'
-           
+
         $CreateAlt    = Read-Host
-        
+
 #create Alternative UPN
         If($CreateAlt -eq 'y'){
         Write-Host " `nPlease Confirm New User Creation:`nDisplay Name = $Displayname`nFirst Name   = $Given`nLast Name = $Surname`nUsername = $AltAlias`nUser Principal Name = $altInitialUpn`nOffice Number = $OfficeNumber`nOffice = $Location`nStreet Address = $Street`nCity = $city`nState = $state`nZip Code = $postalcode`nG: Drive = $HomeDirectoryAlt`nTitle = $Title`nDepartment = $org`nManager = $Manager`nDo you want to proceed in the account creation? (y/n)`n "
         $Creation = Read-Host
         If($Creation -eq 'y'){
         Write-Host "Success"
-#Create User 
+#Create User
         $NewUser = New-ADUser -Name $Displayname -AccountPassword $Passcode -City $city -Company "Ware Malcomb" -Country $country -Department $org -DisplayName $Displayname -Enabled 1 -GivenName $Given -HomeDirectory $HomeDirectory -HomeDrive G: -Manager $manager -Office $Location -OfficePhone $officenumber -Path $OfficeUserDN -PostalCode $postalcode -SamAccountName $AltAlias -ScriptPath SLOGIC -State $state -StreetAddress $Street -Surname $Surname -Title $title -UserPrincipalName $AltInitialUpn
 
 #sync IRVDC2 to IRVDC2
@@ -527,33 +529,34 @@ Default { }
 #Create Initial UPN
 Else{
         Write-Host " `nPlease Confirm New User Creation:`nDisplay Name = $Displayname`nFirst Name   = $Given`nLast Name = $Surname`nUsername = $Alias`nUser Principal Name = $InitialUpn`nOffice Number = $OfficeNumber`nOffice = $Location`nStreet Address = $Street`nCity = $city`nState = $state`nZip Code = $postalcode`nG: Drive = $HomeDirectory`nTitle = $Title`nDepartment = $org`nManager = $Manager`nDo you want to proceed in the account creation? (y/n)`n "
-        $CreateInt = Read-Host 
+        $CreateInt = Read-Host
         If($CreateInt -eq 'y'){
 
 #Create User
         Write-host "Creating $InitialUpn"
         $NewUser = New-ADUser -Name $Displayname -AccountPassword $Passcode -City $city -Company "Ware Malcomb" -Country $country -Department $org -DisplayName $Displayname -Enabled 1 -GivenName $Given -HomeDirectory $HomeDirectory -HomeDrive G: -Manager $manager -Office $Location -OfficePhone $officenumber -Path $OfficeUserDN -PostalCode $postalcode -SamAccountName $alias -ScriptPath SLOGIC -State $state -StreetAddress $Street -Surname $Surname -Title $title -UserPrincipalName $InitialUpn
-        
+
         Write-Host "Success"
 
 
-        #Set-ADUser -Identity $InitialUpn 
-#sync DC to 
+        #Set-ADUser -Identity $InitialUpn
+#sync DC to
         Invoke-Command -ComputerName irvdc2 -ScriptBlock {repadmin /replicate "Irvdc2" "irvdc1" 'DC=wma-arch,DC=com'}
         timeout /t 5
 
 #create MailBox
         Connect-ExchangeOnPrem
         Enable-RemoteMailbox $Alias –remoteroutingaddress $RemoteAddress
+        Set-ADUser $alias -UserPrincipalName $finalUpn
         #>
-}  
+}
 }
 
 <#sync azure with timeout
         Sync-Azure
         timeout /t 30
 #Assign and e3 or e1
-        Connect-Office365 -Service MSOnline -MFA 
+        Connect-Office365 -Service MSOnline -MFA
             $LicenseAnswer = Read-host -Prompt Do you want to assign this user E3 or E1?
                 If($LicenseAnswer -match '1'){
                     Get-MsolUser -SearchString $Alias | Set-MsolUserLicense -AddLicenses $e1
@@ -570,7 +573,7 @@ Else{
 
 #QC
     $UserObject = New-Object -TypeName PSObject -Property @{
-                UserDisplayName           = $NewUser.DisplayName 
+                UserDisplayName           = $NewUser.DisplayName
                 UserSamAccountName        = $NewUser.SamAccountName
                 UserEmailAddress          = $NewUser.EmailAddress
                 UserDistinguishedName     = $NewUser.DistinguishedName
@@ -586,3 +589,4 @@ Else{
 
 #>
 
+}

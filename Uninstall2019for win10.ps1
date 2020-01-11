@@ -1,0 +1,1 @@
+Get-ADComputer -Filter * | Where-Object {$_.name -match 'win10'} | Select-Object -ExpandProperty name | ForEach-Object {Invoke-Command -ComputerName $_ -ScriptBlock {(Get-WmiObject -Class win32_product | Where-Object {$_.name -match '2019'}).uninstall()}}
