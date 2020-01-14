@@ -25,8 +25,6 @@ if($users.count -gt 1){
 
 	$Name = $users.DisplayName[($answer-1)]
 
-
-
     $UserObject = New-Object -TypeName PSObject -Property @{
                 DisplayName                = $users[($answer-1)].DisplayName
                 SamAccountname             = $users[($answer-1)].SamAccountName

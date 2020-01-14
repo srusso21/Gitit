@@ -31,3 +31,6 @@ Write-Host -ForegroundColor DarkYellow 'Use $s18emails for Sketchup2018 emails'
 Write-Host -ForegroundColor Magenta 'Use $s19emails for Sketchup2019 emails'
 Write-Host -ForegroundColor Green 'Use $aemails for Adobe emails'
 Write-Host -ForegroundColor Yellow 'Use $l85emails for Lumion8.5 emails'
+
+
+
