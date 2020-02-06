@@ -96,8 +96,6 @@
             Write-Host "Workstation number : $ComputerName`nDecription         : Available - $ComputerModel`nModel              : $ComputerModel`nMachineType        : $Type`nOU                 : $TargetOU" -ForegroundColor Green
             Set-ADComputer -Identity $ComputerName -Description "Available - $ComputerModel"
             
-        }else{
-                Write-Host "User not found"
         }
     }
 }
