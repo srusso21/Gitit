@@ -1,0 +1,1 @@
+﻿Get-NetAdapter | select -ExpandProperty name | ForEach-Object {Disable-NetAdapterBinding -Name $_ -ComponentID ms_tcpip6}

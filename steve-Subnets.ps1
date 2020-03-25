@@ -1,0 +1,61 @@
+﻿$VPNList = (Get-VPNConnection -AllUserConnection).name
+ForEach ($Connection in $VPNList){
+Set-VpnConnection -SplitTunneling $True -AllUserConnection -TunnelType L2tp -EncryptionLevel Optional -Name $Connection -WarningAction SilentlyContinue                 
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.1.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.1.100.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.1.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.11.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.11.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.12.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.12.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.13.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.13.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.14.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.15.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.16.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.2.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.20.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.21.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.26.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.27.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.28.0.0/25
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.29.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.29.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.3.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.3.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.4.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.4.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.4.26.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.5.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.5.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.6.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.6.252.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.8.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.9.0.0/16
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 10.9.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.0.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.1.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.11.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.12.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.13.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.14.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.15.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.16.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.19.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.2.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.20.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.21.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.23.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.24.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.25.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.252.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.253.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.254.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.3.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.4.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.5.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.6.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.8.0/24
+Add-VpnConnectionRoute -ConnectionName $Connection -DestinationPrefix 192.168.9.0/24
+
+}

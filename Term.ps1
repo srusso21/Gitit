@@ -68,17 +68,19 @@ Write-Host "Account has been disabled"
 Move-ADObject -Identity $UserObject -TargetPath "OU=!Pending Deletion,DC=wma-arch,DC=Com"
 
 #notify Boris that user has been terminated
-Send-MailMessage -SmtpServer "webmail.waremalcomb.com" -To "bshevelev@waremalcomb.com" -From "$admin" -Subject 'Remove BIM360 License' -Body "$name is no longer an employee at Ware Malcomb. Their email was $email.  Please remove their BIM 360 License. Thank you."
+Send-MailMessage -SmtpServer "192.168.0.7" -To "bshevelev@waremalcomb.com" -From "$admin" -Subject 'Remove BIM360 License' -Body "$name is no longer an employee at Ware Malcomb. Their email was $email.  Please remove their BIM 360 License. Thank you."
 
 #EOnline connect
-Connect-Office365 -Service Exchange -MFA
+#Connect-Office365 -Service Exchange -MFA
+Connect-ExchangeOnline -ShowProgress $true
+
 
 Set-CASMailbox -Identity $Email -ActiveSyncEnabled $False
 Write-Host 'Active Sync Disabled'
 
 #convert to shared
-Set-Mailbox -identity $upn -Type Shared
-Write-Host 'Mailbox converted to shared'
+#Set-Mailbox -identity $upn -Type Shared
+#Write-Host 'Mailbox converted to shared'
 
 #forwards email to manager
 #Set-Mailbox -Identity $Email -ForwardingSMTPAddress $Manager.emailaddress
@@ -94,13 +96,23 @@ Write-Host "$name's mailbox has mounted on $managername's Outlook"
 Get-PSSession | Remove-PSSession
 
 #connect to MSOL
-Connect-Office365 -Service MSOnline -MFA
+<<<<<<< HEAD
+#Connect-Office365 -Service MSOnline -MFA
+#Set-MsolUserLicense -UserPrincipalName $Upn -RemoveLicense (Get-MsolUser -UserPrincipalName $Upn | select -ExpandProperty licenses).AccountSkuId
+#Write-Host "E1/E3 license has been removed"
+#Get-PSSession | Remove-PSSession
+=======
+Connect-MSOLService
 Set-MsolUserLicense -UserPrincipalName $Upn -RemoveLicense (Get-MsolUser -UserPrincipalName $Upn | select -ExpandProperty licenses).AccountSkuId
 Write-Host "E1/E3 license has been removed"
 Get-PSSession | Remove-PSSession
+>>>>>>> a405e06035ead1a3b1e1b7143e38d4806177eff6
 
-#compliance center connect from my custom functions
-Connect-Office365 -Service SecurityAndCompliance -MFA
+#compliance center connect from Hybrid exoPSSession
+Import-Module $((Get-ChildItem -Path $($env:LOCALAPPDATA+"\Apps\2.0\") -Filter Microsoft.Exchange.Management.ExoPowershellModule.dll -Recurse ).FullName|?{$_ -notmatch "_none_"}|select -First 1)
+$MFCCPSSession = New-ExoPSSession -ConnectionUri 'https://ps.compliance.protection.outlook.com/PowerShell-LiveId'
+import-pssession $MFCCPSSession
+
 
 # Create Compliance Search - Export Email
 $SearchName = "Export - " + (Get-ADUser $User).Name

@@ -107,6 +107,5 @@ if(@($users).count -eq 0){
 	write-host "No users found"
 }
 }
-Get-AnyEmployee 'staci tave'
 }
 

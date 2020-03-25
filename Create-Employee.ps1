@@ -435,7 +435,6 @@ Default { }
 }
 }
 }
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 & "\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Get-Exports.ps1"
 #define Variables
     $e3                = "waremalcomb:POWER_BI_STANDARD","waremalcomb:ENTERPRISEPACK","waremalcomb:DYN365_TEAM_MEMBERS","waremalcomb:FLOW_FREE"
