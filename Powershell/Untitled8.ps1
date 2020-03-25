@@ -1,1 +1,0 @@
-﻿Invoke-Command -ComputerName WS-2116 -ScriptBlock {(Get-ItemProperty HKLM:\SOFTWARE\Autodesk\Revit\2017\REVIT-05:0409).serialnumber}

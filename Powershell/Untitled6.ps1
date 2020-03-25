@@ -1,2 +1,0 @@
-﻿$computername = Read-Host -Prompt 'Computer Name?'
-Get-WmiObject win32_product -ComputerName $computername | Where-Object {$_.Name -like "Microsoft Office Professional Plus*" -or $_.Name -Like "Microsoft Office Standard*" }  | select Name,Version
