@@ -45,10 +45,10 @@
 
 $a = Get-ADComputer -Filter * -Properties description
 
-$test[0] |
+
 
 
 foreach ($user in $list){
-    Add-Member -MemberType NoteProperty -Name  -Value 123 -Force
+    
     $a | Where-Object {($_.description -eq $SplitName[0]) -and ($_.description -eq $splitName[1])} | select name,description
 }

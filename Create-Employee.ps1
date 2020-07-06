@@ -1,4 +1,4 @@
-﻿Function Create-Employee {
+﻿function Create-Employee{
 #add Functions
 function Connect-ExchangeOnPrem {
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://irvmail01.wma-arch.com/PowerShell/ -Authentication Kerberos
@@ -435,7 +435,7 @@ Default { }
 }
 }
 }
-& "\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Get-Exports.ps1"
+#& "\\wma-arch.com\irvine\Admin\IT\Licenses Info\Data\Exports\AD\Get-Exports.ps1"
 #define Variables
     $e3                = "waremalcomb:POWER_BI_STANDARD","waremalcomb:ENTERPRISEPACK","waremalcomb:DYN365_TEAM_MEMBERS","waremalcomb:FLOW_FREE"
     $e1                = "waremalcomb:STANDARDPACK"

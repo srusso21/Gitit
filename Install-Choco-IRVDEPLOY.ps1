@@ -7,5 +7,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 #$choco install rufus                     -y
 #$choco install sysinternals              -y
 #choco install github-desktop -y
-#choco install notepadplusplus           -y
-choco upgrade qap
+choco install notepadplusplus           -y
